@@ -1,7 +1,7 @@
 /*
  * Create a list that holds all of your cards
  */
-
+const cardList = ['diamond', 'diamond', 'paper-plane', 'paper-plane', 'anchor', 'anchor', 'bolt', 'bolt', 'cube', 'cube', 'leaf', 'leaf', 'bicycle', 'bicycle', 'bomb', 'bomb']
 
 /*
  * Display the cards on the page
