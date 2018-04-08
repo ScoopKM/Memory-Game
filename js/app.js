@@ -1,7 +1,22 @@
-/*
- * Create a list that holds all of your cards
- */
-const cardList = ['diamond', 'diamond', 'paper-plane', 'paper-plane', 'anchor', 'anchor', 'bolt', 'bolt', 'cube', 'cube', 'leaf', 'leaf', 'bicycle', 'bicycle', 'bomb', 'bomb']
+// *
+//  * Create a list that holds all of your cards
+//  *
+let cardList = ['diamond',
+'diamond',
+'paper-plane',
+'paper-plane',
+'anchor',
+'anchor',
+'bolt',
+'bolt',
+'cube',
+'cube',
+'leaf',
+'leaf',
+'bicycle',
+'bicycle',
+'bomb',
+'bomb'];
 
 /*
  * Display the cards on the page
@@ -12,7 +27,7 @@ const cardList = ['diamond', 'diamond', 'paper-plane', 'paper-plane', 'anchor', 
 
 // Shuffle function from http://stackoverflow.com/a/2450976
 function shuffle(array) {
-    var currentIndex = array.length, temporaryValue, randomIndex;
+    let currentIndex = array.length, temporaryValue, randomIndex;
 
     while (currentIndex !== 0) {
         randomIndex = Math.floor(Math.random() * currentIndex);
@@ -25,14 +40,42 @@ function shuffle(array) {
     return array;
 }
 
+// let cardLayout = shuffle(cardList);
+  // deck empty
+  // insertAdjacentHTML before the end
+  // add the li class card and the cardList name
+  // add the i class fa fa-cardList name
+// document.getElementsByClassName('.deck').innerHTML = for (let  i =  0; i < cardList.length; i++)  {
+// 		('<li class="card"><i class="fa fa-' + cardList[i] + '"></i></li>'))
+//   }
 
-/*
- * set up the event listener for a card. If a card is clicked:
- *  - display the card's symbol (put this functionality in another function that you call from this one)
- *  - add the card to a *list* of "open" cards (put this functionality in another function that you call from this one)
- *  - if the list already has another card, check to see if the two cards match
- *    + if the cards do match, lock the cards in the open position (put this functionality in another function that you call from this one)
- *    + if the cards do not match, remove the cards from the list and hide the card's symbol (put this functionality in another function that you call from this one)
- *    + increment the move counter and display it on the page (put this functionality in another function that you call from this one)
- *    + if all cards have matched, display a message with the final score (put this functionality in another function that you call from this one)
- */
+const cardLayout = function createCardGame(cardList) {
+  let cardGame = document.getElementsByClassName('.deck').innerHTML;
+  for (let i = 0; i < cardList.length; i++) {
+    ('<li class="card"><i class="fa fa-" + cardList[i] + ></i></li>')
+  }
+  return cardGame;
+}
+
+
+ // * set up the event listener for a card. If a card is clicked:
+// function deck () {
+//   let deckList = document.querySelectorAll('.deck');
+// }
+//
+// let firstClickedCard = deckList.find('.card');
+//
+//  firstClickedCard.addEventListener('click', function () {
+//    console.log('The 1st card was clicked!');
+//  });
+
+ // $deck.find('.card').bind('click', function () {
+ //   var $this = $(this)
+
+ // *  - display the card's symbol (put this functionality in another function that you call from this one)
+ // *  - add the card to a *list* of "open" cards (put this functionality in another function that you call from this one)
+ // *  - if the list already has another card, check to see if the two cards match
+ // *    + if the cards do match, lock the cards in the open position (put this functionality in another function that you call from this one)
+ // *    + if the cards do not match, remove the cards from the list and hide the card's symbol (put this functionality in another function that you call from this one)
+ // *    + increment the move counter and display it on the page (put this functionality in another function that you call from this one)
+ // *    + if all cards have matched, display a message with the final score (put this functionality in another function that you call from this one)
