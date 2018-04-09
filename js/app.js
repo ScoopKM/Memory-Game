@@ -1,7 +1,7 @@
 // *
 //  * Create a list that holds all of your cards
 //  *
-let cardList = ['diamond',
+let cardSymbols = ['diamond',
 'diamond',
 'paper-plane',
 'paper-plane',
@@ -18,12 +18,7 @@ let cardList = ['diamond',
 'bomb',
 'bomb'];
 
-/*
- * Display the cards on the page
- *   - shuffle the list of cards using the provided "shuffle" method below
- *   - loop through each card and create its HTML
- *   - add each card's HTML to the page
- */
+
 
 // Shuffle function from http://stackoverflow.com/a/2450976
 function shuffle(array) {
@@ -40,38 +35,30 @@ function shuffle(array) {
     return array;
 }
 
-// let cardLayout = shuffle(cardList);
-  // deck empty
-  // insertAdjacentHTML before the end
-  // add the li class card and the cardList name
-  // add the i class fa fa-cardList name
-// document.getElementsByClassName('.deck').innerHTML = for (let  i =  0; i < cardList.length; i++)  {
-// 		('<li class="card"><i class="fa fa-' + cardList[i] + '"></i></li>'))
-//   }
+/*
+ * Display the cards on the page
+ *   - shuffle the list of cards using the provided "shuffle" method below
+ *   - loop through each card and create its HTML
+ *   - add each card's HTML to the page
+ */
 
-const cardLayout = function createCardGame(cardList) {
-  let cardGame = document.getElementsByClassName('.deck').innerHTML;
-  for (let i = 0; i < cardList.length; i++) {
-    ('<li class="card"><i class="fa fa-" + cardList[i] + ></i></li>')
-  }
-  return cardGame;
+const Deck = document.querySelector('.deck');
+Deck.innerHTML = '';
+
+function cardClicked() {
+  console.log('The card was clicked');
 }
 
+let cardLayout = shuffle(cardSymbols);
+  for (let i = 0; i < cardSymbols.length; i++) {
+    const createCard = document.createElement('li');
+    // The below addEventListener is not working and will need to be updated at a later time.
+    createCard.addEventListener('click', cardClicked);
+    Deck.appendChild(createCard);
+    createCard.outerHTML = '<li class="card ' + cardLayout[i] +' "><i class="fa fa-' + cardLayout[i] + '"></i></li>';
+}
 
  // * set up the event listener for a card. If a card is clicked:
-// function deck () {
-//   let deckList = document.querySelectorAll('.deck');
-// }
-//
-// let firstClickedCard = deckList.find('.card');
-//
-//  firstClickedCard.addEventListener('click', function () {
-//    console.log('The 1st card was clicked!');
-//  });
-
- // $deck.find('.card').bind('click', function () {
- //   var $this = $(this)
-
  // *  - display the card's symbol (put this functionality in another function that you call from this one)
  // *  - add the card to a *list* of "open" cards (put this functionality in another function that you call from this one)
  // *  - if the list already has another card, check to see if the two cards match
