@@ -52,10 +52,10 @@ function cardClicked() {
 let cardLayout = shuffle(cardSymbols);
   for (let i = 0; i < cardSymbols.length; i++) {
     const createCard = document.createElement('li');
-    // The below addEventListener is not working and will need to be updated at a later time.
     createCard.addEventListener('click', cardClicked);
+    createCard.setAttribute('class', 'card ' +  cardLayout[i]);
+    createCard.innerHTML = '<i class="fa fa-' + cardLayout[i] + '"></i>';
     Deck.appendChild(createCard);
-    createCard.outerHTML = '<li class="card ' + cardLayout[i] +' "><i class="fa fa-' + cardLayout[i] + '"></i></li>';
 }
 
  // * set up the event listener for a card. If a card is clicked:
