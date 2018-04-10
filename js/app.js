@@ -45,18 +45,27 @@ function shuffle(array) {
 const Deck = document.querySelector('.deck');
 Deck.innerHTML = '';
 
-function cardClicked() {
-  console.log('The card was clicked');
-}
-
 let cardLayout = shuffle(cardSymbols);
   for (let i = 0; i < cardSymbols.length; i++) {
-    const createCard = document.createElement('li');
-    createCard.addEventListener('click', cardClicked);
+    let createCard = document.createElement('li');
     createCard.setAttribute('class', 'card ' +  cardLayout[i]);
     createCard.innerHTML = '<i class="fa fa-' + cardLayout[i] + '"></i>';
     Deck.appendChild(createCard);
+    createCard.addEventListener('click', cardClicked);
 }
+
+function cardClicked() {
+ // const firstClicked = event.target.class = 'open', 'show';
+  document.querySelector('.card').classList.add('open', 'show');
+  console.log('The card was clicked');
+  }
+
+// function cardClicked() {
+//   for (let i= 0; i < cardSymbols.length; i++) {
+//     document.querySelector('.card', '.fa fa-' + cardSymbols[i]).classList.add('open');
+//     console.log('The card was clicked');
+//   }
+// }
 
  // * set up the event listener for a card. If a card is clicked:
  // *  - display the card's symbol (put this functionality in another function that you call from this one)
