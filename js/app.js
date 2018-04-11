@@ -51,19 +51,17 @@ let cardLayout = shuffle(cardSymbols);
     createCard.setAttribute('class', 'card ');
     createCard.innerHTML = '<i class="fa fa-' + cardLayout[i] + '"></i>';
     Deck.appendChild(createCard);
-    Deck.addEventListener('click', firstCardClicked);
-    Deck.addEventListener('click', secondCardClicked);
+    Deck.addEventListener('click', cardClicked);
+    // Deck.addEventListener('click', secondCardClicked);
 }
 
-function firstCardClicked(event) {
-  event.target.className = 'card open show';
+function cardClicked(event) {
+  let clickedCards = []
+  let openedCards = event.target.className = 'card open show';
+  clickedCards.push(openedCards)
   console.log('The card was clicked');
+  console.log(clickedCards)
   }
-
-function secondCardClicked(event) {
-  event.target.className = 'card open show';
-  console.log('The 2nd card was clicked');
-}
 
 // I need to be able to get the first click to add class open and show and then stop. Then get the second slick to add class open and show, and then evaluate if the the clicked card and second clicked card match. If not matched remove class open and show. If matched, replace class open and show with match, and then stop and hold the cards in place.
 //
