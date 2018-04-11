@@ -48,24 +48,27 @@ Deck.innerHTML = '';
 let cardLayout = shuffle(cardSymbols);
   for (let i = 0; i < cardSymbols.length; i++) {
     let createCard = document.createElement('li');
-    createCard.setAttribute('class', 'card ' +  cardLayout[i]);
+    createCard.setAttribute('class', 'card ');
     createCard.innerHTML = '<i class="fa fa-' + cardLayout[i] + '"></i>';
     Deck.appendChild(createCard);
-    createCard.addEventListener('click', cardClicked);
+    Deck.addEventListener('click', firstCardClicked);
+    Deck.addEventListener('click', secondCardClicked);
 }
 
-function cardClicked() {
- // const firstClicked = event.target.class = 'open', 'show';
-  document.querySelector('.card').classList.add('open', 'show');
+function firstCardClicked(event) {
+  event.target.className = 'card open show';
   console.log('The card was clicked');
   }
 
-// function cardClicked() {
-//   for (let i= 0; i < cardSymbols.length; i++) {
-//     document.querySelector('.card', '.fa fa-' + cardSymbols[i]).classList.add('open');
-//     console.log('The card was clicked');
-//   }
-// }
+function secondCardClicked(event) {
+  event.target.className = 'card open show';
+  console.log('The 2nd card was clicked');
+}
+
+// I need to be able to get the first click to add class open and show and then stop. Then get the second slick to add class open and show, and then evaluate if the the clicked card and second clicked card match. If not matched remove class open and show. If matched, replace class open and show with match, and then stop and hold the cards in place.
+//
+// From there I need the game to realize when all cards are matched, and finish the game.
+
 
  // * set up the event listener for a card. If a card is clicked:
  // *  - display the card's symbol (put this functionality in another function that you call from this one)
