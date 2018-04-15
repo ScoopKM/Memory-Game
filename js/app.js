@@ -60,41 +60,36 @@ let matchedCards=[]
 function cardClicked(event) {
   if (event.target.className === 'card') {
     event.target.classList.add('open', 'show');
-    console.log('The card was clicked');
-    addCardsToClickedCards(event.target);
+    addCardsToClickedCards(event);
+    doCardsMatch(event);
   }
 }
 
 function addCardsToClickedCards(event) {
-  clickedCards.push(event.outerHTML);
-  console.log(clickedCards);
-  console.log(clickedCards[0]);
+  clickedCards.push(event.target);
 }
 
-if (clickedCards[0] === clickedCards[1]) {
-  setTimeout(function() {
-    clickedCards[0].classList.add('match');
-    clickedCards[0].classList.remove('open', 'show');
-    clickedCards[1].classList.add('match');
-    clickedCards[1].classList.remove('open', 'show');
-    console.log(clickedCards);
-    matchedCards.push(clickedCards[0]);
-    matchedCards.push(clickedCards[1]);
-    console.log(matchedCards);
-    clickedCards.pop(clickedCards[0]);
-    clickedCards.pop(clickedCards[1]);
-    console.log(clickedCards);
-  }, 1200);
-} else {
-    setTimeout(function() {
-      clickedCards[0].classList.remove('open', 'show');
-      clickedCards[1].classList.remove('open', 'show');
-      console.log(clickedCards);
-      clickedCards.pop(clickedCards[0]);
-      clickedCards.pop(clickedCards[1]);
-      console.log(clickedCards);
-    }, 1200);
+// Know Bug:
+// 1. If clicking 2+ cards to quickly a card will be left open, and not matched or turned back over.
+function doCardsMatch(event) {
+  if (clickedCards.length === 2) {
+    if (clickedCards[0].innerHTML === clickedCards[1].innerHTML) {
+        clickedCards[0].classList.add('match');
+        clickedCards[0].classList.remove('open', 'show');
+        clickedCards[1].classList.add('match');
+        clickedCards[1].classList.remove('open', 'show');
+        matchedCards.push(clickedCards);
+        clickedCards.length = 0
+    } else {
+        setTimeout(function() {
+          clickedCards[0].classList.remove('open', 'show');
+          clickedCards[1].classList.remove('open', 'show');
+          clickedCards.length = 0
+        }, 800);
+    }
+  }
 }
+
 
 
 // I need to be able to get the first click to add class open and show and then stop. Then get the second slick to add class open and show, and then evaluate if the the clicked card and second clicked card match. If not matched remove class open and show. If matched, replace class open and show with match, and then stop and hold the cards in place.
