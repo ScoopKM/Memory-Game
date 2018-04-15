@@ -54,23 +54,48 @@ let cardLayout = shuffle(cardSymbols);
     Deck.addEventListener('click', cardClicked);
 }
 
-// Known bug:
-// 1. Once the card is flipped over, if you click on the card symbol it gets overwritten with card, open, show.
-// 2. If you click on the within the deck, and not on a card the deck is replaced with 16 open and shown symbols
-// 3.Only adds each individual card if you strart from the bottom right going left, and work your way up.
-function cardClicked(event) {
-  event.target.className = 'card open show';
-  console.log('The card was clicked');
-  let cardMatchOne = document.querySelector('.open, .show');
-  clickedCards.push(cardMatchOne.childNodes[0]);
-  console.log(clickedCards);
-  }
-
 let clickedCards = []
+let matchedCards=[]
 
-function doCardsMatch(){
-
+function cardClicked(event) {
+  if (event.target.className === 'card') {
+    event.target.classList.add('open', 'show');
+    console.log('The card was clicked');
+    addCardsToClickedCards(event.target);
   }
+}
+
+function addCardsToClickedCards(event) {
+  clickedCards.push(event.outerHTML);
+  console.log(clickedCards);
+  console.log(clickedCards[0]);
+}
+
+if (clickedCards[0] === clickedCards[1]) {
+  setTimeout(function() {
+    clickedCards[0].classList.add('match');
+    clickedCards[0].classList.remove('open', 'show');
+    clickedCards[1].classList.add('match');
+    clickedCards[1].classList.remove('open', 'show');
+    console.log(clickedCards);
+    matchedCards.push(clickedCards[0]);
+    matchedCards.push(clickedCards[1]);
+    console.log(matchedCards);
+    clickedCards.pop(clickedCards[0]);
+    clickedCards.pop(clickedCards[1]);
+    console.log(clickedCards);
+  }, 1200);
+} else {
+    setTimeout(function() {
+      clickedCards[0].classList.remove('open', 'show');
+      clickedCards[1].classList.remove('open', 'show');
+      console.log(clickedCards);
+      clickedCards.pop(clickedCards[0]);
+      clickedCards.pop(clickedCards[1]);
+      console.log(clickedCards);
+    }, 1200);
+}
+
 
 // I need to be able to get the first click to add class open and show and then stop. Then get the second slick to add class open and show, and then evaluate if the the clicked card and second clicked card match. If not matched remove class open and show. If matched, replace class open and show with match, and then stop and hold the cards in place.
 //
