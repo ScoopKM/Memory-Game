@@ -48,19 +48,28 @@ Deck.innerHTML = '';
 let cardLayout = shuffle(cardSymbols);
   for (let i = 0; i < cardSymbols.length; i++) {
     let createCard = document.createElement('li');
-    createCard.setAttribute('class', 'card ');
+    createCard.setAttribute('class', 'card');
     createCard.innerHTML = '<i class="fa fa-' + cardLayout[i] + '"></i>';
     Deck.appendChild(createCard);
     Deck.addEventListener('click', cardClicked);
-    // Deck.addEventListener('click', secondCardClicked);
 }
 
+// Known bug:
+// 1. Once the card is flipped over, if you click on the card symbol it gets overwritten with card, open, show.
+// 2. If you click on the within the deck, and not on a card the deck is replaced with 16 open and shown symbols
+// 3.Only adds each individual card if you strart from the bottom right going left, and work your way up.
 function cardClicked(event) {
-  let clickedCards = []
-  let openedCards = event.target.className = 'card open show';
-  clickedCards.push(openedCards)
+  event.target.className = 'card open show';
   console.log('The card was clicked');
-  console.log(clickedCards)
+  let cardMatchOne = document.querySelector('.open, .show');
+  clickedCards.push(cardMatchOne.childNodes[0]);
+  console.log(clickedCards);
+  }
+
+let clickedCards = []
+
+function doCardsMatch(){
+
   }
 
 // I need to be able to get the first click to add class open and show and then stop. Then get the second slick to add class open and show, and then evaluate if the the clicked card and second clicked card match. If not matched remove class open and show. If matched, replace class open and show with match, and then stop and hold the cards in place.
@@ -75,4 +84,3 @@ function cardClicked(event) {
  // *    + if the cards do match, lock the cards in the open position (put this functionality in another function that you call from this one)
  // *    + if the cards do not match, remove the cards from the list and hide the card's symbol (put this functionality in another function that you call from this one)
  // *    + increment the move counter and display it on the page (put this functionality in another function that you call from this one)
- // *    + if all cards have matched, display a message with the final score (put this functionality in another function that you call from this one)
