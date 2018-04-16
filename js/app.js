@@ -62,6 +62,7 @@ function cardClicked(event) {
     event.target.classList.add('open', 'show');
     addCardsToClickedCards(event);
     doCardsMatch(event);
+    startTimer(event);
   }
 }
 
@@ -79,21 +80,34 @@ function doCardsMatch(event) {
         clickedCards[1].classList.add('match');
         clickedCards[1].classList.remove('open', 'show');
         matchedCards.push(clickedCards);
-        clickedCards.length = 0
+        clickedCards.length = 0;
+        moveCounter();
     } else {
         setTimeout(function() {
           clickedCards[0].classList.remove('open', 'show');
           clickedCards[1].classList.remove('open', 'show');
-          clickedCards.length = 0
+          clickedCards.length = 0;
+          moveCounter();
         }, 800);
     }
   }
 }
 
 
+function moveCounter() {
+  let moves = document.querySelector('.moves');
+  if (clickedCards.length === 0) {
+    moves.innerHTML++;
+  }
+}
 
-// I need to be able to get the first click to add class open and show and then stop. Then get the second slick to add class open and show, and then evaluate if the the clicked card and second clicked card match. If not matched remove class open and show. If matched, replace class open and show with match, and then stop and hold the cards in place.
-//
+function startTimer(event) {
+  let startingTime = document.querySelector('.timer');
+  setInterval(function (event) {
+    startingTime.innerHTML++;
+  }, 1000);
+}
+
 // From there I need the game to realize when all cards are matched, and finish the game.
 
 
