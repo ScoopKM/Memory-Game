@@ -19,7 +19,6 @@ let cardSymbols = ['diamond',
 'bomb'];
 
 
-
 // Shuffle function from http://stackoverflow.com/a/2450976
 function shuffle(array) {
     let currentIndex = array.length, temporaryValue, randomIndex;
@@ -70,7 +69,7 @@ function addCardsToClickedCards(event) {
   clickedCards.push(event.target);
 }
 
-// Know Bug:
+// Known Bug:
 // 1. If clicking 2+ cards to quickly a card will be left open, and not matched or turned back over.
 function doCardsMatch(event) {
   if (clickedCards.length === 2) {
@@ -93,21 +92,26 @@ function doCardsMatch(event) {
   }
 }
 
+let moves = 0
 
 function moveCounter() {
-  let moves = document.querySelector('.moves');
+  let moveNumber = document.querySelector('.moves');
   if (clickedCards.length === 0) {
-    moves.innerHTML++;
+    moves++;
+    moveNumber.innerHTML = moves;
+    starRating(moves);
   }
 }
 
 //Known Bugs:
 // 1. Once the timer reaches 60 seconds, it tarts counting only minutes, but treats them like seconds. It never shows hours, even when it hits 3,600 seconds.
 // 2. If you click more then once in any session the timer count speeds up with every click.
+
+let sec = 0
+let min = 0
+let hr = 0
+
 function startTimer(event) {
-  let sec = 0
-  let min = 0
-  let hr = 0
   let startingTime = document.querySelector('.timer');
   setInterval(function (event) {
     if (sec < 60){
@@ -123,15 +127,15 @@ function startTimer(event) {
   }, 1000);
 }
 
-
+function starRating(moves) {
+  let starCount = document.querySelector('.stars');
+  if (moves >= 12 && moves < 18) {
+    let starThree = starCount.childNodes[5].childNodes[0].className = 'fa fa-star-o';
+  } else if  (moves >= 18 && moves < 24) {
+    let starTwo = starCount.childNodes[3].childNodes[0].className = 'fa fa-star-o';
+  } else if (moves > 24) {
+      let starOne = starCount.childNodes[1].childNodes[0].className = 'fa fa-star-o';
+  }
+}
 
 // From there I need the game to realize when all cards are matched, and finish the game.
-
-
- // * set up the event listener for a card. If a card is clicked:
- // *  - display the card's symbol (put this functionality in another function that you call from this one)
- // *  - add the card to a *list* of "open" cards (put this functionality in another function that you call from this one)
- // *  - if the list already has another card, check to see if the two cards match
- // *    + if the cards do match, lock the cards in the open position (put this functionality in another function that you call from this one)
- // *    + if the cards do not match, remove the cards from the list and hide the card's symbol (put this functionality in another function that you call from this one)
- // *    + increment the move counter and display it on the page (put this functionality in another function that you call from this one)
