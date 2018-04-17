@@ -101,12 +101,29 @@ function moveCounter() {
   }
 }
 
+//Known Bugs:
+// 1. Once the timer reaches 60 seconds, it tarts counting only minutes, but treats them like seconds. It never shows hours, even when it hits 3,600 seconds.
+// 2. If you click more then once in any session the timer count speeds up with every click.
 function startTimer(event) {
+  let sec = 0
+  let min = 0
+  let hr = 0
   let startingTime = document.querySelector('.timer');
   setInterval(function (event) {
-    startingTime.innerHTML++;
+    if (sec < 60){
+      sec++;
+      return startingTime.innerHTML = sec;
+    } else if (sec === 60) {
+      min++;
+      return startingTime.innerHTML = min + ':' + sec;
+    } else if  (min === 60) {
+      hr++;
+      return startingTime.innerHTML = hr + ':' + min + ':' + sec;
+    }
   }, 1000);
 }
+
+
 
 // From there I need the game to realize when all cards are matched, and finish the game.
 
