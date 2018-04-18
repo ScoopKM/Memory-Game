@@ -1,6 +1,3 @@
-// *
-//  * Create a list that holds all of your cards
-//  *
 let cardSymbols = ['diamond',
 'diamond',
 'paper-plane',
@@ -34,24 +31,17 @@ function shuffle(array) {
     return array;
 }
 
-/*
- * Display the cards on the page
- *   - shuffle the list of cards using the provided "shuffle" method below
- *   - loop through each card and create its HTML
- *   - add each card's HTML to the page
- */
-
 const Deck = document.querySelector('.deck');
 Deck.innerHTML = '';
 
-let cardLayout = shuffle(cardSymbols);
-  for (let i = 0; i < cardSymbols.length; i++) {
-    let createCard = document.createElement('li');
-    createCard.setAttribute('class', 'card');
-    createCard.innerHTML = '<i class="fa fa-' + cardLayout[i] + '"></i>';
-    Deck.appendChild(createCard);
-    Deck.addEventListener('click', cardClicked);
-}
+  let cardLayout = shuffle(cardSymbols);
+    for (let i = 0; i < cardSymbols.length; i++) {
+      let createCard = document.createElement('li');
+      createCard.setAttribute('class', 'card');
+      createCard.innerHTML = '<i class="fa fa-' + cardLayout[i] + '"></i>';
+      Deck.appendChild(createCard);
+      Deck.addEventListener('click', cardClicked);
+    }
 
 let clickedCards = []
 let matchedCards=[]
@@ -61,7 +51,7 @@ function cardClicked(event) {
     event.target.classList.add('open', 'show');
     addCardsToClickedCards(event);
     doCardsMatch(event);
-    startTimer(event);
+    startTimer();
   }
 }
 
@@ -81,6 +71,7 @@ function doCardsMatch(event) {
         matchedCards.push(clickedCards);
         clickedCards.length = 0;
         moveCounter();
+        gameComplete();
     } else {
         setTimeout(function() {
           clickedCards[0].classList.remove('open', 'show');
@@ -111,9 +102,9 @@ let sec = 0
 let min = 0
 let hr = 0
 
-function startTimer(event) {
+function startTimer() {
   let startingTime = document.querySelector('.timer');
-  setInterval(function (event) {
+  setInterval(function () {
     if (sec < 60){
       sec++;
       return startingTime.innerHTML = sec;
@@ -127,8 +118,8 @@ function startTimer(event) {
   }, 1000);
 }
 
+let starCount = document.querySelector('.stars');
 function starRating(moves) {
-  let starCount = document.querySelector('.stars');
   if (moves >= 12 && moves < 18) {
     let starThree = starCount.childNodes[5].childNodes[0].className = 'fa fa-star-o';
   } else if  (moves >= 18 && moves < 24) {
@@ -136,6 +127,22 @@ function starRating(moves) {
   } else if (moves > 24) {
       let starOne = starCount.childNodes[1].childNodes[0].className = 'fa fa-star-o';
   }
+  return starCount;
 }
 
-// From there I need the game to realize when all cards are matched, and finish the game.
+// function restartGame() {
+//   let restart = document.querySelector('.restart');
+//   restart.addEventListener('click', function (){
+//     newGame ();
+//   });
+// }
+
+function gameComplete() {
+  let wonTheGame = document.getElementsByClassName('modal');
+  if (matchedCards.length === 8) {
+  wonTheGame[0].style.display = 'block';
+  document.querySelector('.final-move-count').innerHTML = moves;
+  document.querySelector('.final-time-count').innerHTML = sec;
+  document.querySelector('.final-star-count').innerHTML = starCount;
+  }
+}

@@ -112,3 +112,28 @@ h1 {
     float: right;
     cursor: pointer;
 }
+
+.modal {
+  display: none;
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: silver;
+  opacity: 0.9;
+
+}
+.winning-game {
+  position: relative;
+    background-color: black;
+    border-radius: 5px;
+    border: 5px solid grey;
+    margin: auto;
+    margin-top: 30%;
+    width: 50%;
+    height: 30%;
+    text-align: center;
+    color: white;
+}
