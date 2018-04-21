@@ -15,6 +15,26 @@ let cardSymbols = ['diamond',
 'bomb',
 'bomb'];
 
+let clickedCards = []
+let matchedCards=[]
+
+let moveNumber = document.querySelector('.moves');
+let moves = 0;
+
+let sec = 0;
+let min = 0;
+let hr = 0;
+let startingTime = document.querySelector('.timer');
+let timerCount;
+
+let starCount = document.querySelector('.stars');
+
+let restart = document.querySelector('.restart');
+restart.addEventListener('click', newGame);
+
+let wonTheGame = document.getElementsByClassName('modal');
+
+let exit = document.querySelector('.close');
 
 // Shuffle function from http://stackoverflow.com/a/2450976
 function shuffle(array) {
@@ -31,27 +51,35 @@ function shuffle(array) {
     return array;
 }
 
-const Deck = document.querySelector('.deck');
-Deck.innerHTML = '';
+window.onload  = newGame();
+function newGame() {
+  sec = 0;
+  min = 0;
+  hr = 0;
+  startingTime.innerHTML = hr + ':' + min + ':' + sec;
+  moves = 0;
+  moveNumber.innerHTML = moves;
+  starCount.childNodes[5].childNodes[0].className = 'fa fa-star';
+  starCount.childNodes[3].childNodes[0].className = 'fa fa-star';
+  starCount.childNodes[1].childNodes[0].className = 'fa fa-star';
 
+  const Deck = document.querySelector('.deck');
+  Deck.innerHTML = '';
   let cardLayout = shuffle(cardSymbols);
-    for (let i = 0; i < cardSymbols.length; i++) {
-      let createCard = document.createElement('li');
-      createCard.setAttribute('class', 'card');
-      createCard.innerHTML = '<i class="fa fa-' + cardLayout[i] + '"></i>';
-      Deck.appendChild(createCard);
-      Deck.addEventListener('click', cardClicked);
-    }
-
-let clickedCards = []
-let matchedCards=[]
+  for (let i = 0; i < cardSymbols.length; i++) {
+    let createCard = document.createElement('li');
+    createCard.setAttribute('class', 'card');
+    createCard.innerHTML = '<i class="fa fa-' + cardLayout[i] + '"></i>';
+    Deck.appendChild(createCard);
+    Deck.addEventListener('click', cardClicked);
+  }
+}
 
 function cardClicked(event) {
   if (event.target.className === 'card') {
     event.target.classList.add('open', 'show');
     addCardsToClickedCards(event);
     doCardsMatch(event);
-    startTimer();
   }
 }
 
@@ -83,10 +111,7 @@ function doCardsMatch(event) {
   }
 }
 
-let moves = 0
-
 function moveCounter() {
-  let moveNumber = document.querySelector('.moves');
   if (clickedCards.length === 0) {
     moves++;
     moveNumber.innerHTML = moves;
@@ -95,54 +120,73 @@ function moveCounter() {
 }
 
 //Known Bugs:
-// 1. Once the timer reaches 60 seconds, it tarts counting only minutes, but treats them like seconds. It never shows hours, even when it hits 3,600 seconds.
-// 2. If you click more then once in any session the timer count speeds up with every click.
-
-let sec = 0
-let min = 0
-let hr = 0
-
+// 1.If calling back startTime(), inside and at the end of cardClicked if you click more then once in any session the timer count speeds up with every click, because its starting a new timer and trying to display each timer simultaneously.
+// 2.Timer doesn't start back up after the timer interval is removed when you win the game and then click the restart button or new game. Commented out the stopTimer function for the time being.
+window.onload = startTimer();
 function startTimer() {
-  let startingTime = document.querySelector('.timer');
-  setInterval(function () {
-    if (sec < 60){
+  timerCount = setInterval(function () {
+    startingTime.innerHTML = hr + ':' + min + ':'  + sec;
+    if (sec < 60) {
       sec++;
-      return startingTime.innerHTML = sec;
-    } else if (sec === 60) {
+    }
+    if (sec === 60) {
       min++;
-      return startingTime.innerHTML = min + ':' + sec;
-    } else if  (min === 60) {
-      hr++;
-      return startingTime.innerHTML = hr + ':' + min + ':' + sec;
+      sec = 0;
+    }
+    if  (min === 60) {
+      hr++
+      min =0;
     }
   }, 1000);
 }
 
-let starCount = document.querySelector('.stars');
+// function stopTimer() {
+//   clearInterval(timerCount);
+// }
+
 function starRating(moves) {
   if (moves >= 12 && moves < 18) {
-    let starThree = starCount.childNodes[5].childNodes[0].className = 'fa fa-star-o';
+    starCount.childNodes[5].childNodes[0].className = 'fa fa-star-o';
   } else if  (moves >= 18 && moves < 24) {
-    let starTwo = starCount.childNodes[3].childNodes[0].className = 'fa fa-star-o';
+    starCount.childNodes[3].childNodes[0].className = 'fa fa-star-o';
   } else if (moves > 24) {
-      let starOne = starCount.childNodes[1].childNodes[0].className = 'fa fa-star-o';
+     starCount.childNodes[1].childNodes[0].className = 'fa fa-star-o';
   }
   return starCount;
 }
 
-// function restartGame() {
-//   let restart = document.querySelector('.restart');
-//   restart.addEventListener('click', function (){
-//     newGame ();
-//   });
-// }
+function replayGame(event) {
+  let replay = document.querySelector('.replayButton')
+  replay.addEventListener('click', function () {
+    wonTheGame[0].style.display = 'none';
+    newGame();
+  });
+}
+
+function exitGame (event) {
+  exit.addEventListener('click', function () {
+    wonTheGame[0].style.display ='none';
+    sec = 0;
+    min = 0;
+    hr = 0;
+    startingTime.innerHTML = hr + ':' + min + ':' + sec;
+    moves = 0;
+    moveNumber.innerHTML = moves;
+    starCount.childNodes[5].childNodes[0].className = 'fa fa-star';
+    starCount.childNodes[3].childNodes[0].className = 'fa fa-star';
+    starCount.childNodes[1].childNodes[0].className = 'fa fa-star';
+  });
+}
 
 function gameComplete() {
-  let wonTheGame = document.getElementsByClassName('modal');
   if (matchedCards.length === 8) {
   wonTheGame[0].style.display = 'block';
+  document.querySelector('.winning-game-message').innerHTML = "Congratulation you matched all the cards!!!";
   document.querySelector('.final-move-count').innerHTML = moves;
-  document.querySelector('.final-time-count').innerHTML = sec;
-  document.querySelector('.final-star-count').innerHTML = starCount;
+  document.querySelector('.final-time-count').innerHTML = hr + ':' + min + ':' + sec;
+  document.querySelector('.final-star-count').innerHTML = starCount.innerHTML
+  stopTimer();
+  replayGame();
+  exitGame();
   }
 }
