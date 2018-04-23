@@ -1,3 +1,32 @@
+/* resize at 600px width */
+/* min width 320px, max width na */
+/* min height 550px, max height 1400px */
+/* starting from 550px, every 100px rezise, maybe every 200px */
+/* phone width 320px-650px, height 550px-850px */
+/*
+anything bigger then phone sizes, min width 600px min height 600px,
+
+phone min width 320px-450px,
+ min height 320-450px
+min height 450-550px
+min height 550-650px
+min height 650-750px
+min height 750-850px
+
+phone min width 450px-550px
+ min height 320-450px
+min height 450-550px
+min height 550-650px
+min height 650-750px
+min height 750-850px
+
+phone min width 550px-650px
+ min height 320-450px
+min height 450-550px
+min height 550-650px
+min height 650-750px
+min height 750-850px */
+
 html {
     box-sizing: border-box;
 }
@@ -31,6 +60,7 @@ body {
 h1 {
     font-family: 'Open Sans', sans-serif;
     font-weight: 300;
+    margin: 10px 0 0px
 }
 
 /*
@@ -38,8 +68,8 @@ h1 {
  */
 
 .deck {
-    width: 660px;
-    min-height: 680px;
+    width: 550px;
+    min-height: 475px;
     background: linear-gradient(160deg, #02ccba 0%, #aa7ecd 100%);
     padding: 32px;
     border-radius: 10px;
@@ -52,8 +82,9 @@ h1 {
 }
 
 .deck .card {
-    height: 125px;
-    width: 125px;
+    height: 100px;
+    width: 100px;
+    margin: 10px 0 0;
     background: #2e3d49;
     font-size: 0;
     color: #ffffff;
@@ -88,7 +119,7 @@ h1 {
 .score-panel {
     text-align: left;
     width: 500px;
-    margin-bottom: 10px;
+    margin: 10px 0 2px;
     cursor: default;
 }
 
@@ -132,9 +163,12 @@ h1 {
   border-radius: 5px;
   border: 5px solid grey;
   margin: auto;
-  margin-top: 30%;
+  margin-top: 270px;
   width: 50%;
+  max-width: 550px;
+  min-width: 420px;
   height: 30%;
+  min-height: 200px;
   text-align: center;
   color: white;
 }

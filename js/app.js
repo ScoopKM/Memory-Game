@@ -53,10 +53,14 @@ function shuffle(array) {
 
 window.onload  = newGame();
 function newGame() {
+  clickedCards = []
+  matchedCards=[]
   sec = 0;
   min = 0;
   hr = 0;
   startingTime.innerHTML = hr + ':' + min + ':' + sec;
+  clearInterval(timerCount);
+  startTimer();
   moves = 0;
   moveNumber.innerHTML = moves;
   starCount.childNodes[5].childNodes[0].className = 'fa fa-star';
@@ -76,7 +80,7 @@ function newGame() {
 }
 
 function cardClicked(event) {
-  if (event.target.className === 'card') {
+  if (event.target.className === 'card' && clickedCards.length <2) {
     event.target.classList.add('open', 'show');
     addCardsToClickedCards(event);
     doCardsMatch(event);
@@ -121,8 +125,7 @@ function moveCounter() {
 
 //Known Bugs:
 // 1.If calling back startTime(), inside and at the end of cardClicked if you click more then once in any session the timer count speeds up with every click, because its starting a new timer and trying to display each timer simultaneously.
-// 2.Timer doesn't start back up after the timer interval is removed when you win the game and then click the restart button or new game. Commented out the stopTimer function for the time being.
-window.onload = startTimer();
+
 function startTimer() {
   timerCount = setInterval(function () {
     startingTime.innerHTML = hr + ':' + min + ':'  + sec;
@@ -139,10 +142,6 @@ function startTimer() {
     }
   }, 1000);
 }
-
-// function stopTimer() {
-//   clearInterval(timerCount);
-// }
 
 function starRating(moves) {
   if (moves >= 12 && moves < 18) {
@@ -185,7 +184,7 @@ function gameComplete() {
   document.querySelector('.final-move-count').innerHTML = moves;
   document.querySelector('.final-time-count').innerHTML = hr + ':' + min + ':' + sec;
   document.querySelector('.final-star-count').innerHTML = starCount.innerHTML
-  stopTimer();
+  clearInterval(timerCount);
   replayGame();
   exitGame();
   }
