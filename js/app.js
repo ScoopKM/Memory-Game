@@ -51,6 +51,7 @@ function shuffle(array) {
     return array;
 }
 
+// New Game function that starts the game or starts a new game if the restart or New Game? button is clicked.
 window.onload  = newGame();
 function newGame() {
   clickedCards = []
@@ -67,6 +68,7 @@ function newGame() {
   starCount.childNodes[3].childNodes[0].className = 'fa fa-star';
   starCount.childNodes[1].childNodes[0].className = 'fa fa-star';
 
+// Deck HTML creation using the suffle function
   const Deck = document.querySelector('.deck');
   Deck.innerHTML = '';
   let cardLayout = shuffle(cardSymbols);
@@ -79,6 +81,7 @@ function newGame() {
   }
 }
 
+// Response to a card being clicked
 function cardClicked(event) {
   if (event.target.className === 'card' && clickedCards.length <2) {
     event.target.classList.add('open', 'show');
@@ -87,12 +90,12 @@ function cardClicked(event) {
   }
 }
 
+// Adding clicked cards to Clicked Cards for further evaluation.
 function addCardsToClickedCards(event) {
   clickedCards.push(event.target);
 }
 
-// Known Bug:
-// 1. If clicking 2+ cards to quickly a card will be left open, and not matched or turned back over.
+// Evaluation of the two cards in Clicked Cards, and determining if they match or not.
 function doCardsMatch(event) {
   if (clickedCards.length === 2) {
     if (clickedCards[0].innerHTML === clickedCards[1].innerHTML) {
@@ -115,6 +118,7 @@ function doCardsMatch(event) {
   }
 }
 
+// Increases the move counter if a pair of cards are clicked.
 function moveCounter() {
   if (clickedCards.length === 0) {
     moves++;
@@ -126,6 +130,7 @@ function moveCounter() {
 //Known Bugs:
 // 1.If calling back startTime(), inside and at the end of cardClicked if you click more then once in any session the timer count speeds up with every click, because its starting a new timer and trying to display each timer simultaneously.
 
+// Starts the game timer based on a New Game
 function startTimer() {
   timerCount = setInterval(function () {
     startingTime.innerHTML = hr + ':' + min + ':'  + sec;
@@ -143,6 +148,7 @@ function startTimer() {
   }, 1000);
 }
 
+// Star rating based on the number of moves you have made.
 function starRating(moves) {
   if (moves >= 12 && moves < 18) {
     starCount.childNodes[5].childNodes[0].className = 'fa fa-star-o';
@@ -154,6 +160,7 @@ function starRating(moves) {
   return starCount;
 }
 
+// Restarts the game
 function replayGame(event) {
   let replay = document.querySelector('.replayButton')
   replay.addEventListener('click', function () {
@@ -162,6 +169,7 @@ function replayGame(event) {
   });
 }
 
+// Exits the winning game message
 function exitGame (event) {
   exit.addEventListener('click', function () {
     wonTheGame[0].style.display ='none';
@@ -177,6 +185,7 @@ function exitGame (event) {
   });
 }
 
+// Displays the winning game message
 function gameComplete() {
   if (matchedCards.length === 8) {
   wonTheGame[0].style.display = 'block';
