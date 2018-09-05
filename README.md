@@ -10,7 +10,7 @@
 ## How to Play
 
 To play the game follow the link for the live version
-https://scoopkm.github.io/fend-project-memory-game/
+https://scoopkm.github.io/Memory-Game/
 
 The game board holds 16 cards, and the goal is to match each card to its pair. When you click on each face down card, the card will display the card's symbol and have a blue border. When you click on the second card, they will either match and both cards' boarder will turn green, while continuing to display the card's symbol, or both cards will turn back face down indicating the cards did not match. The goal of the game is to match the 8 pairs and reach the winning screen. Afterwards you can either choose to play a new game, or close the winning screen.
 

@@ -152,10 +152,8 @@ function startTimer() {
 function starRating(moves) {
   if (moves >= 12 && moves < 18) {
     starCount.childNodes[5].childNodes[0].className = 'fa fa-star-o';
-  } else if  (moves >= 18 && moves < 24) {
+  } else if (moves >= 18) {
     starCount.childNodes[3].childNodes[0].className = 'fa fa-star-o';
-  } else if (moves > 24) {
-     starCount.childNodes[1].childNodes[0].className = 'fa fa-star-o';
   }
   return starCount;
 }
