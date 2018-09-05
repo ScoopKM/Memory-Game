@@ -14,7 +14,7 @@ https://scoopkm.github.io/Memory-Game/
 
 The game board holds 16 cards, and the goal is to match each card to its pair. When you click on each face down card, the card will display the card's symbol and have a blue border. When you click on the second card, they will either match and both cards' boarder will turn green, while continuing to display the card's symbol, or both cards will turn back face down indicating the cards did not match. The goal of the game is to match the 8 pairs and reach the winning screen. Afterwards you can either choose to play a new game, or close the winning screen.
 
-During the game there will be a timer that tracks how long it takes for you to complete the game. In addition to the timer, there is a move counter that tracks how many times you try to match 2 cards. There is a corresponding star rating system from 0 stars to 3 stars based off your number of moves. Also you can restart the game at any time by clicking on the restart button or refreshing your browser.
+During the game there will be a timer that tracks how long it takes for you to complete the game. In addition to the timer, there is a move counter that tracks how many times you try to match 2 cards. There is a corresponding star rating system from 1 stars to 3 stars based off your number of moves. Also you can restart the game at any time by clicking on the restart button or refreshing your browser.
 
 ## Star Rating
 
@@ -23,16 +23,17 @@ Your star rating is based off the number of moves, it takes you to match all of 
 The current star rating is as follows:
 * 3 Stars - 11 moves or less
 * 2 Stars - 12-17 moves
-* 1 Stars - 18-23 moves
-* 0 Stars - 24 moves or more
+* 1 Stars - 18 moves or more
 
 ## Instructions on How to Make Your Own Game
 
 To get your own starter code click here: https://github.com/udacity/fend-project-memory-game
 
+Once you're at the starter code repository you will want to fork the repository to your personal GitHub. From there  you will want to clone/download the forked repository to your local machine, and open `index.html` in the browser to see your memory come to live as you make changes to the code.
+
 The starter code has some HTML and CSS styling to display a static version of the Memory Game project. You'll need to convert this project from a static project to an interactive one. This will require modifying the HTML and CSS files, but primarily the JavaScript file.
 
-To get started, open `js/app.js` and start building out the app's functionality
+To get started building out the functionality of your app, open `js/app.js` and start building away.
 
 For specific, detailed instructions, look at the project instructions in the [Udacity Classroom](https://classroom.udacity.com/me).
 
